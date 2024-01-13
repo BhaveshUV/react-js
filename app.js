@@ -1,3 +1,7 @@
+// Importing React and ReactDOM from respective packages/dependencies
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 let htmlCode = React.createElement("div", {}, [
