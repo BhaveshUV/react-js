@@ -1,3 +1,11 @@
 #head {
     color: goldenrod;
 }
+
+#search-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    background-color: rgb(39, 41, 59);
+    color: white;
+}
