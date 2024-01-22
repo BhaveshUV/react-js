@@ -1,11 +1,133 @@
-#head {
+body {
+    background-color: rgb(23, 41, 54);
+}
+
+#app {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Header */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    height: 7rem;
+    padding: 0.2rem;
+    /* background-color: rgb(187, 137, 10); */
+    border-radius: 0.5rem;
+    padding: 0 10vw;
+}
+
+.logo-container img {
+    border-radius: 0.5rem;
+    height: 100%;
+}
+
+.nav-items {
+    color: white;
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0 1rem;
+    align-self: center;
+    font-size: 1.5rem;
+}
+
+li {
+    cursor: pointer;
+}
+
+/* Body */
+.body {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 10vw;
+}
+
+/* search box */
+.search-box {
+    width: 100%;
+    height: 2.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+#search {
+    width: 100%;
+    border-radius: 0.5rem;
+    font-size: 1.1rem;
+}
+
+#search::placeholder {
+    padding: 0 0.25rem;
+    font-size: 1rem;
+}
+
+.search-box button {
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+/* Cards */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.card {
+    width: 12rem;
+    padding: 0.35rem;
+    border-radius: 0.25rem;
+}
+
+.card:hover {
+    background-color: rgba(255, 217, 0, 0.586);
+    box-shadow: 2px 2px 5px black;
+    cursor: pointer;
+}
+
+.card img {
+    width: 100%;
+    border-radius: 0.25rem;
+}
+
+.card-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.card-title #title {
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
     color: goldenrod;
 }
 
-#search-bar {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    background-color: rgb(39, 41, 59);
+.card:hover .card-title #title {
     color: white;
+}
+
+.card-title button {
+    line-height: 1;
+    height: 1rem;
+    width: 2.7rem;
+    appearance: none;
+    border: none;
+    border-radius: 1rem;
+    background-color: rgb(36, 122, 36);
+}
+
+.card span {
+    color: gray;
+}
+
+.card:hover span {
+    color: rgb(115, 82, 0);
 }
