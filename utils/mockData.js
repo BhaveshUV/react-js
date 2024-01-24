@@ -1,7 +1,3 @@
-// Importing React and ReactDOM from respective packages/dependencies
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-
 let restaurants = [
     {
         info: {
@@ -1755,67 +1751,4 @@ let restaurants = [
     }
 ];
 
-let Header = () => {
-    return (
-        <div className='header'>
-            <div className='logo-container'>
-                <img src="https://img.freepik.com/free-vector/sticker-template-with-food-delivery-banner-isolated_1308-62732.jpg?w=740&t=st=1705576529~exp=1705577129~hmac=641de4625ac9c82c0e91f608c7c24bf5709aa6e2f4f1848243693d6e672cc1dc" />
-            </div>
-            <ul className='nav-items'>
-                <li style={{ color: "#ebdb34" }}>Home</li>
-                <li>About</li>
-                <li>Contact</li>
-                <li>Cart</li>
-            </ul>
-        </div>
-    );
-}
-
-let Search = () => {
-    return (
-        <div className="search-box">
-            <input type="text" id="search" placeholder='Search for restaurant, cuisine or a dish' />
-            <button>Search</button>
-        </div>
-    );
-}
-
-let Card = (props) => {
-    let { restaurant } = props;
-    let { info } = restaurant;
-    return (
-        <div className='card'>
-            <img src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/" + info.cloudinaryImageId} />
-            <div className="card-title">
-                <span id="title">{info.name}</span>
-                <button>{info.avgRating}&#9733;</button>
-            </div>
-            <span>{info.cuisines.join(", ")}</span>
-        </div>
-    );
-}
-
-let Body = () => {
-    return (
-        <div className='body'>
-            <Search />
-            <div className='card-container'>
-                {restaurants.map((restaurant) => <Card key={restaurant.info.id} restaurant={restaurant} />)}
-                {/* This is a js comment inside JSX */}
-            </div>
-        </div>
-    );
-}
-
-const App = () => {
-    return (
-        <div id='app'>
-            <Header />
-            <Body />
-        </div>
-    );
-}
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(App());
+export default restaurants;
