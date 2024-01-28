@@ -2,7 +2,6 @@
   "name": "react",
   "version": "1.0.0",
   "description": "Learning ReactJS from Akshay Saini",
-
   "scripts": {
     "test": "jest",
     "start": "parcel index.html",
@@ -29,7 +28,8 @@
   },
   "dependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.21.3"
   },
   "browserslist": [
     "last 2 chrome versions"

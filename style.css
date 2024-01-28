@@ -13,6 +13,7 @@ body {
 .header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     height: 7rem;
     padding: 0.2rem;
     /* background-color: rgb(187, 137, 10); */
@@ -20,9 +21,13 @@ body {
     padding: 0 10vw;
 }
 
+.logo-container {
+    height: inherit;
+}
+
 .logo-container img {
     border-radius: 0.5rem;
-    height: 100%;
+    height: inherit;
 }
 
 .nav-items {
@@ -34,10 +39,24 @@ body {
     padding: 0 1rem;
     align-self: center;
     font-size: 1.5rem;
+    align-items: center;
 }
 
 li {
+    /* line-height: 1; */
     cursor: pointer;
+    display: flex;
+}
+
+li button {
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 1.3rem;
+    line-height: 2;
+    padding: 0 1rem;
+    border-radius: 0.25rem;
+    background-color: goldenrod;
+    color: white;
 }
 
 /* Body */
@@ -72,11 +91,18 @@ li {
     font-size: 1rem;
 }
 
+/* Filter button */
+#filter button {
+    background-color: rgb(36, 122, 36);
+    border-radius: 0.5rem;
+    line-height: 1.5;
+}
+
 /* Cards */
 .card-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     gap: 2rem;
 }
 
@@ -84,6 +110,9 @@ li {
     width: 12rem;
     padding: 0.35rem;
     border-radius: 0.25rem;
+    /* flex-grow: 1; */
+    flex-shrink: 1;
+    max-width: 15rem;
 }
 
 .card:hover {
@@ -130,4 +159,36 @@ li {
 
 .card:hover span {
     color: rgb(115, 82, 0);
+}
+
+/* Shimmer cards */
+
+.shimmer-card {
+    border-radius: 0.25rem;
+}
+
+.shimmer-card .image{
+    width: 12rem;
+    height: 10rem;
+    border-radius: inherit;
+    background-color: #a9a9a9;
+}
+
+.shimmer-card .card-title #title {
+    height: 1rem;
+    width: 8rem;
+    border-radius: 0.25rem;
+    background-color: #a9a9a9;
+}
+
+.shimmer-card .card-title button {
+    background-color: #a9a9a9;
+}
+
+.shimmer-card span {
+    display: inline-block;
+    height: 1rem;
+    width: 100%;
+    border-radius: inherit;
+    background-color: #a9a9a9;
 }
