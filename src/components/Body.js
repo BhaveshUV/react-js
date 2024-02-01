@@ -1,17 +1,18 @@
 import Card from "./Card";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
+import { Link } from "react-router-dom";
 
 let searchFunc = undefined;
 
-window.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-        searchFunc();
-        // console.log(event);
-    }
-});
 
 export let Body = () => {
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+            searchFunc();
+            // console.log(event);
+        }
+    });
     let html = document.getElementsByTagName("html");
     let [rests, setRests] = useState([]);
     let [searchTxt, setSearchTxt] = useState(``);
@@ -95,7 +96,7 @@ export let Body = () => {
                 }>4+ Rating</button>
             </div>
             <div className='card-container'>
-                {rests.map((restaurant) => <Card key={restaurant.info.id} restaurant={restaurant} />)}
+                {rests.map((restaurant) => <Link to={`/restaurants/${restaurant.info.id}`} key={restaurant.info.id}><Card restaurant={restaurant} /></Link>)}
                 {/* This is a js comment inside JSX */}
             </div>
         </div>
