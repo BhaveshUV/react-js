@@ -61,16 +61,16 @@ const Restaurant = () => {
             </div>
             <div className="menu">
                 <div className="veg-nonVeg-toggle">
-                    <label htmlFor="vegBtn" style={{cursor: "pointer"}} onClick={() => {
-                        checkBox = document.getElementById("vegBtn");
-                        (checkBox.checked) ? setIsVeg(true) : setIsVeg(false);
-                    }}>
+                    <label htmlFor="vegBtn" style={{cursor: "pointer"}}>
                         Veg only
                         <div className="toggler-container">
                             <div className="toggler"></div>
                         </div>
                     </label>
-                    <input id="vegBtn" type="checkbox"></input>
+                    <input id="vegBtn" type="checkbox" onChange={() => {
+                        checkBox = document.getElementById("vegBtn");
+                        setIsVeg(checkBox.checked);
+                    }}></input>
                 </div>
                 <hr />
                 <h2>Menu</h2>

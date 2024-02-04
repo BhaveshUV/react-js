@@ -7,19 +7,25 @@ let searchFunc = undefined;
 
 
 export let Body = () => {
-    window.addEventListener("keydown", (event) => {
-        if (event.key === "Enter") {
-            searchFunc();
-            // console.log(event);
-        }
-    });
+    // console.log(`Body render`);
     let html = document.getElementsByTagName("html");
     let [rests, setRests] = useState([]);
     let [searchTxt, setSearchTxt] = useState(``);
     let [restsCopy, setRestsCopy] = useState([]);
     // console.log("RestsCopy: ", restsCopy);
     useEffect(() => {
+        let action = (event) => {
+            if (event.key === "Enter") {
+                searchFunc();
+                console.log(event);
+            }
+        }
+        window.addEventListener("keydown", action);
         fetchData?.();
+        
+        return () => {
+            window.removeEventListener("keydown", action);
+        }
     }, []);
 
     let fetchData = async () => {
@@ -56,7 +62,8 @@ export let Body = () => {
     }
     
     searchFunc = function () {
-        let search = document.getElementById("search");
+        console.log(`SearchFunc through Event Listener`)
+        // let search = document.getElementById("search");
         let rests = restsCopy.filter(
             (rest) => {
                 return (rest.info.name.toLowerCase().includes(searchTxt.toLowerCase()) || rest.info.cuisines.some(
