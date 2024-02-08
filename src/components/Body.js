@@ -2,6 +2,7 @@ import Card from "./Card";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../../utils/useOnlineStatus";
 
 let searchFunc = undefined;
 
@@ -22,7 +23,7 @@ export let Body = () => {
         }
         window.addEventListener("keydown", action);
         fetchData?.();
-        
+
         return () => {
             window.removeEventListener("keydown", action);
         }
@@ -38,6 +39,13 @@ export let Body = () => {
         setRests(restList);
     }
 
+    let status = useOnlineStatus();
+    if (!status) {
+        return <h2 style={{ color: "white", textAlign: "center" }}>
+            Looks like you are offline! Please check your internet connection
+        </h2>;
+    }
+
     if (rests.length === 0) {
 
         return (
@@ -45,10 +53,10 @@ export let Body = () => {
             <div className='body'>
                 <div className="search-box">
                     <input type="text" id="search" placeholder='Search for restaurant, cuisine or a dish' value={searchTxt} onChange={
-                    (e) => {
-                        setSearchTxt(e.target.value);
-                    }
-                }/>
+                        (e) => {
+                            setSearchTxt(e.target.value);
+                        }
+                    } />
                     <button id="searchBtn">Search</button>
                 </div>
                 <div id="filter">
@@ -60,7 +68,7 @@ export let Body = () => {
             </div>
         )
     }
-    
+
     searchFunc = function () {
         console.log(`SearchFunc through Event Listener`)
         // let search = document.getElementById("search");
@@ -73,7 +81,7 @@ export let Body = () => {
                 ));
             }
         );
-        if(rests != false) {
+        if (rests != false) {
             setRests(rests);
         }
     }
@@ -86,7 +94,7 @@ export let Body = () => {
                     (e) => {
                         setSearchTxt(e.target.value);
                     }
-                }/>
+                } />
                 {/* <Search /> */}
                 <button id="searchBtn" onClick={
                     () => {

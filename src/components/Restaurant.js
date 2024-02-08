@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { MENU_URL } from "../../utils/constant";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import ShimmerRest from "./ShimmerRest";
+import useRestInfo from "../../utils/useRestInfo";
 
 const VegIcon = () => {
     return (
@@ -19,22 +19,12 @@ const NonVegIcon = () => {
 }
 
 const Restaurant = () => {
-    const [restInfo, setRestInfo] = useState(null);
     const [isVeg, setIsVeg] = useState(false);
     const { resId } = useParams();
 
     console.log(resId);
 
-    const fetchData = async () => {
-        const info = await fetch(MENU_URL + resId);
-        const json = await info.json();
-        console.log(json);
-        setRestInfo(json.data);
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const restInfo = useRestInfo(resId);
 
     if (restInfo == null) {
         return (
@@ -61,7 +51,7 @@ const Restaurant = () => {
             </div>
             <div className="menu">
                 <div className="veg-nonVeg-toggle">
-                    <label htmlFor="vegBtn" style={{cursor: "pointer"}}>
+                    <label htmlFor="vegBtn" style={{ cursor: "pointer" }}>
                         Veg only
                         <div className="toggler-container">
                             <div className="toggler"></div>

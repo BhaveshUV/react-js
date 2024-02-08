@@ -6,15 +6,27 @@ class UserCardClass extends React.Component {
         super(props);
         this.state = {
             count: 0,
-        }
+            user: {
+                name: "Dummy-name",
+                location: "Dummy-location",
+                login: "Dummy-username"
+            }
+        };
         console.log("Parent constructor");
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         // this.timer = setInterval(() => {
         //     console.log(`Timer`);
         // }, 1000);
         console.log(`Parent componentDidMount`);
+
+        // API call
+        const data = await fetch("https://api.github.com/users/BhaveshUV");
+        const json = await data.json();
+        this.setState({
+            user: json,
+        });
     }
 
     componentDidUpdate() {
@@ -31,9 +43,11 @@ class UserCardClass extends React.Component {
         return (
             <div className="user-card">
                 <h2>Class-component</h2>
-                <div>{this.props.name}</div>
-                <div>{this.props.location}</div>
-                <div>{this.props.contact}</div>
+                <img src={this.state.user.avatar_url} alt="Photo" style={{width: "70%"}}></img>
+                <div>UserId: {this.state.user.login}</div>
+                <div>Name: {this.state.user.name}</div>
+                <div>Location: {this.state.user.location}</div>
+                <div>Contact: {this.props.contact}</div>
                 <div style={{color: "black"}}>State-variable: {this.state.count}</div>
                 <button onClick={() => {
                     this.setState({
