@@ -4,9 +4,9 @@ const Error = () => {
     const err = useRouteError();
     console.log(err);
     return (
-        <div id="error">
-            <h3>Oops! Unable to load the page!</h3>
-            <p>{err.status}: {err.statusText}</p>
+        <div className="text-center p-4">
+            <h3 className="text-2xl text-red-700 font-bold mb-2">Oops! Unable to load the page!</h3>
+            <p className="text-yellow-500">{err.status}: {err.statusText}</p>
         </div>
     )
 }

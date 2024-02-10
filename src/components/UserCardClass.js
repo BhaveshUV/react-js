@@ -41,15 +41,15 @@ class UserCardClass extends React.Component {
     render() {
         console.log(`Parent Rendering`);
         return (
-            <div className="user-card">
-                <h2>Class-component</h2>
+            <div className="flex flex-col items-center my-4 mx-auto w-72 ring ring-white rounded-lg bg-yellow-500 p-4">
+                <h2 className="text-xl mb-4">Class-component</h2>
                 <img src={this.state.user.avatar_url} alt="Photo" style={{width: "70%"}}></img>
                 <div>UserId: {this.state.user.login}</div>
                 <div>Name: {this.state.user.name}</div>
                 <div>Location: {this.state.user.location}</div>
                 <div>Contact: {this.props.contact}</div>
-                <div style={{color: "black"}}>State-variable: {this.state.count}</div>
-                <button onClick={() => {
+                <div className="text-black">State-variable: {this.state.count}</div>
+                <button className="bg-green-800 p-1 rounded-md" onClick={() => {
                     this.setState({
                         count: this.state.count + 1,
                     });

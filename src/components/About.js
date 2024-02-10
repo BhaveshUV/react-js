@@ -2,8 +2,8 @@ import UserCardClass from "./UserCardClass.js"
 
 const About = () => {
     return (
-        <div id="about">
-            <h1>Hello there&#128516;✨</h1>
+        <div className="text-center text-white">
+            <h1 className="text-yellow-500 text-2xl font-medium">Hello there&#128516;✨</h1>
             <p>This is a food delivery web-app created while learning React.js 🚀</p>
             <p>By</p>
 

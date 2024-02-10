@@ -5,19 +5,18 @@ const ShimmerRest = () => {
     }
 
     return (
-        <div className="restaurant">
-            <div className="rest-container" style={{ height: "5rem", backgroundColor: "#a9a9a9" }}>
-            </div>
+        <div className="w-[60vw] m-auto text-white flex flex-col gap-8">
+            <div className="rest-container h-28 bg-[#a9a9a9] flex justify-between "></div>
             <div className="menu">
-                <div className="veg-nonVeg-toggle">
+                <div className="veg-nonVeg-toggle mb-2">
                     <div style={{ width: "3.5rem", height: "1.5rem", backgroundColor: "#a9a9a9" }}></div>
-                    <hr />
                 </div>
-                <h2 style={{ width: "4rem", height: "1.7rem", backgroundColor: "#a9a9a9" }}></h2>
-                <div className="categories">
+                <hr />
+                <h2 className="mx-auto my-2" style={{ width: "4rem", height: "1.8rem", backgroundColor: "#a9a9a9" }}></h2>
+                <div className="categories flex flex-col gap-2">
                     {dummyCat.map((categ) => {
                         return (
-                            <div key={categ} id="categ" style={{ backgroundColor: "#a9a9a9" }}>
+                            <div key={categ} id="categ" className="bg-[#ffffff30] p-4 cursor-pointer flex justify-between" style={{ backgroundColor: "#a9a9a9" }}>
                                 <h4>{categ?.card?.card?.title}</h4>
                                 <span style={{ height: "1rem" }}></span>
                             </div>

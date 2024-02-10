@@ -37,46 +37,46 @@ const Restaurant = () => {
     console.log(categories);
     let checkBox = document.getElementById("vegBtn");
     return (
-        <div className="restaurant">
-            <div className="rest-container">
+        <div className="w-[60vw] m-auto text-white flex flex-col gap-8">
+            <div className="flex justify-between">
                 <div className="restInfo">
-                    <h2>{name}</h2>
+                    <h2 className="text-2xl font-bold text-yellow-500">{name}</h2>
                     <div>{cuisines.join(", ")}</div>
                     <div>{sla.deliveryTime} mins</div>
                     <div>{costForTwoMessage}</div>
                 </div>
-                <div className="rating">
+                <div className="border-2 leading-none h-fit p-1 rounded-md">
                     {avgRating} &#9733;
                 </div>
             </div>
             <div className="menu">
                 <div className="veg-nonVeg-toggle">
-                    <label htmlFor="vegBtn" style={{ cursor: "pointer" }}>
+                    <label htmlFor="vegBtn" className="p-2 cursor-pointer flex items-center gap-2 w-fit">
                         Veg only
-                        <div className="toggler-container">
-                            <div className="toggler"></div>
+                        <div className="toggler-container relative inline-flex box-border h-4 w-8 border-2 border-gray-400 rounded-lg">
+                            <div className="toggler absolute inline-block h-full w-5 bg-gray-400 rounded-lg"></div>
                         </div>
                     </label>
-                    <input id="vegBtn" type="checkbox" onChange={() => {
+                    <input id="vegBtn" type="checkbox" className="hidden" onChange={() => {
                         checkBox = document.getElementById("vegBtn");
                         setIsVeg(checkBox.checked);
                     }}></input>
                 </div>
                 <hr />
-                <h2>Menu</h2>
-                <div className="categories">
+                <h2 className="text-xl font-semibold text-center p-2 text-[#daa520]">Menu</h2>
+                <div className="flex flex-col gap-2">
                     {categories?.filter((categ) => (categ?.card?.card?.title?.length > 0 && categ?.card?.card?.title != "Top Picks"))?.map((categ) => {
                         return (
                             <div key={categ?.card?.card?.title}>
-                                <div id="categ">
-                                    <h4>{categ?.card?.card?.title}</h4>
+                                <div id="categ" className="bg-[#ffffff30] p-4 cursor-pointer flex justify-between">
+                                    <h4 className="text-[#daa520] text-xl font-semibold">{categ?.card?.card?.title}</h4>
                                     <span>&#8597;</span>
                                 </div>
                                 {categ?.card?.card?.categories?.map((categ) => {
                                     return (
                                         <div key={categ?.title}>
-                                            <div id="categ">
-                                                <h5>{categ?.title}</h5>
+                                            <div id="categ" className="bg-[#ffffff30] p-4 cursor-pointer flex justify-between">
+                                                <h5 className="font-semibold">{categ?.title}</h5>
                                                 <span>&#8597;</span>
                                             </div>
                                             {categ?.itemCards?.filter((dish) => {

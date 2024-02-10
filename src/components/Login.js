@@ -38,13 +38,13 @@ const Login = () => {
     },
   });
   return (
-    <div className='form-body'>
-      <h2 style={{color: "goldenrod", textAlign: "center"}}>Login Page</h2>
-      <form onSubmit={formik.handleSubmit}>
+    <div className='form-body w-[50vw] mx-auto'>
+      <h2 className="text-yellow-500 text-center text-2xl font-semibold p-4">Login Page</h2>
+      <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
         <div>
-          <div>
-          <label htmlFor="fName">First name: </label>
-          <input
+          <div className='flex items-center gap-4'>
+          <label htmlFor="fName" className='text-white'>First name: </label>
+          <input className='px-2 py-1 rounded-md flex-grow'
             id="fName"
             name="firstName"
             type="text"
@@ -53,12 +53,12 @@ const Login = () => {
             value={formik.values.firstName}
           />
           </div>
-          {formik.errors.firstName && formik.touched.firstName? <div style={{ color: "red", fontSize: "0.7rem" }}>{formik.errors.firstName}</div> : null}
+          {formik.errors.firstName && formik.touched.firstName? <div className="text-red-600 text-xs leading-none">{formik.errors.firstName}</div> : null}
         </div>
         <div>
-          <div>
-          <label htmlFor="lName">Last name: </label>
-          <input
+          <div className='flex items-center gap-4'>
+          <label htmlFor="lName" className='text-white'>Last name: </label>
+          <input className='px-2 py-1 rounded-md flex-grow'
             id="lName"
             name="lastName"
             type="text"
@@ -67,12 +67,12 @@ const Login = () => {
             value={formik.values.lastName}
           />
           </div>
-          {formik.errors.lastName && formik.touched.lastName? <div style={{ color: "red", fontSize: "0.7rem" }}>{formik.errors.lastName}</div> : null}
+          {formik.errors.lastName && formik.touched.lastName? <div className="text-red-600 text-xs leading-none">{formik.errors.lastName}</div> : null}
         </div>
         <div>
-          <div>
-          <label htmlFor="email">Email Address: </label>
-          <input
+          <div className='flex items-center gap-4'>
+          <label htmlFor="email" className='text-white'>Email Address: </label>
+          <input className='px-2 py-1 rounded-md flex-grow'
             id="email"
             name="email"
             type="email"
@@ -81,10 +81,10 @@ const Login = () => {
             value={formik.values.email}
           />
           </div>
-          {formik.errors.email && formik.touched.email? <div style={{ color: "red", fontSize: "0.7rem" }}>{formik.errors.email}</div> : null}
+          {formik.errors.email && formik.touched.email? <div className="text-red-600 text-xs leading-none">{formik.errors.email}</div> : null}
 
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit" className='w-fit self-end bg-green-800 px-2 py-1 rounded-md text-white'>Submit</button>
       </form>
     </div>
   );

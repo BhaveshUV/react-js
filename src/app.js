@@ -15,7 +15,7 @@ import Loading from "./components/Loading";
 
 const App = () => {
     return (
-        <div id='app'>
+        <div id='app' className='flex flex-col gap-8 min-h-[100vh]'>
             <Header />
             <Outlet />
         </div>
