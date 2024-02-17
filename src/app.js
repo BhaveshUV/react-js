@@ -1,5 +1,5 @@
 // Importing React and ReactDOM from respective packages/dependencies
-import React, { lazy, Suspense } from 'react';
+import React, { lazy, Suspense, useState, useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Header } from "./components/Header";
 import Body from './components/Body';
@@ -12,13 +12,27 @@ import Restaurant from './components/Restaurant';
 import Login from "./components/Login";
 let Grocery = lazy(() => import("./components/Grocery"));
 import Loading from "./components/Loading";
+import UserContext from "../utils/UserContext";
+
 
 const App = () => {
+    const [user, setUser] = useState();
+
+    useEffect(() => {
+        const data = {
+            username: "Bhavesh"
+        }
+
+        setUser(data.username);
+    }, []);
+
     return (
-        <div id='app' className='flex flex-col gap-8 min-h-[100vh]'>
-            <Header />
-            <Outlet />
-        </div>
+        <UserContext.Provider value={{ username: user, setUser }}>
+            <div id='app' className='flex flex-col gap-8 min-h-[100vh]'>
+                <Header />
+                <Outlet />
+            </div>
+        </UserContext.Provider>
     );
 }
 

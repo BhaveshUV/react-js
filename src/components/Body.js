@@ -1,8 +1,9 @@
-import Card from "./Card";
-import { useEffect, useState } from "react";
+import Card, { withVegLabel } from "./Card";
+import { useEffect, useState, useContext } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
+import UserContext from "../../utils/UserContext";
 
 let searchFunc = undefined;
 
@@ -13,6 +14,9 @@ export let Body = () => {
     let [rests, setRests] = useState([]);
     let [searchTxt, setSearchTxt] = useState(``);
     let [restsCopy, setRestsCopy] = useState([]);
+
+    let { username, setUser } = useContext(UserContext);
+
     // console.log("RestsCopy: ", restsCopy);
     useEffect(() => {
         let action = (event) => {
@@ -86,6 +90,8 @@ export let Body = () => {
         }
     }
 
+    let VegCard = withVegLabel(Card);
+
     return (
         // html[0].style = "overflow: auto",
         <div className='flex flex-col gap-8 px-[10vw]'>
@@ -102,16 +108,21 @@ export let Body = () => {
                     }
                 }>Search</button>
             </div>
-            <div id="filter">
-                <button className="rounded-md bg-green-800 leading-8 text-white px-2" onClick={
+            <div id="filter" className="flex gap-2 items-center h-8">
+                <button className="rounded-md bg-green-800 text-white px-2 h-full" onClick={
                     () => {
                         let rests = restsCopy.filter((rest) => rest.info.avgRating > 4)
                         setRests(rests);
                     }
                 }>4+ Rating</button>
+                <label htmlFor="dynamic_username" className="text-white">Set the user from here: </label>
+                <input type="text" id="dynamic_username" className="px-2 rounded-lg h-full" value={username} onChange={(e) => setUser(e.target.value)}></input>
             </div>
             <div className='flex flex-wrap justify-center gap-8'>
-                {rests.map((restaurant) => <Link to={`/restaurants/${restaurant.info.id}`} key={restaurant.info.id}><Card restaurant={restaurant} /></Link>)}
+                {rests.map((restaurant) => <Link to={`/restaurants/${restaurant.info.id}`} key={restaurant.info.id}>
+                    {/* {console.log(restaurant)} */}
+                    {restaurant.info.veg ? <VegCard restaurant={restaurant} /> : <Card restaurant={restaurant} />}
+                </Link>)}
                 {/* This is a js comment inside JSX */}
             </div>
         </div>

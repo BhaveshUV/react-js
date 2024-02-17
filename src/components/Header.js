@@ -1,17 +1,20 @@
 import { LOGO_URL } from "../../utils/constant";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
+import UserContext from "../../utils/UserContext";
 
 export let Header = () => {
     const [logBtn, setLogBtn] = useState("Login");
 
     const status = useOnlineStatus();
 
+    let { username } = useContext(UserContext);
+
     return (
         <div className='flex justify-between items-center box-content h-28 px-8 py-2'>
             <div className="h-28 rounded-lg">
-                <img src={LOGO_URL} className="basis-28 min-w-28 h-full rounded-lg"/>
+                <img src={LOGO_URL} className="basis-28 min-w-28 h-full rounded-lg" />
             </div>
             <div style={{ position: "absolute", top: 0, left: "50%", color: "white", transform: "translateX(-50%)" }}>
                 Online Status: {status ? "✅" : "🔴"}
@@ -36,6 +39,7 @@ export let Header = () => {
                     }}>{logBtn}</button></Link> */}
                 </li>
                 {/* <button>Login</button> */}
+                <li>{username}</li>
             </ul>
         </div>
     );

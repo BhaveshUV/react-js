@@ -1,5 +1,6 @@
 import React from "react";
 import UserCardClassChild from "./UserCardClassChild";
+import UserContext from "../../utils/UserContext";
 
 class UserCardClass extends React.Component {
     constructor(props) {
@@ -43,7 +44,10 @@ class UserCardClass extends React.Component {
         return (
             <div className="flex flex-col items-center my-4 mx-auto w-72 ring ring-white rounded-lg bg-yellow-500 p-4">
                 <h2 className="text-xl mb-4">Class-component</h2>
-                <img src={this.state.user.avatar_url} alt="Photo" style={{width: "70%"}}></img>
+                <UserContext.Consumer>
+                    {({username}) => <h1 className="text-white text-2xl font-medium">Hello there, {username}&#128516;✨</h1>}
+                </UserContext.Consumer>
+                <img src={this.state.user.avatar_url} alt="Photo" style={{ width: "70%" }}></img>
                 <div>UserId: {this.state.user.login}</div>
                 <div>Name: {this.state.user.name}</div>
                 <div>Location: {this.state.user.location}</div>
@@ -55,8 +59,8 @@ class UserCardClass extends React.Component {
                     });
                 }}>Increment state-variable</button>
 
-                <UserCardClassChild name="First"/>
-                <UserCardClassChild name="Second"/>
+                <UserCardClassChild name="First" />
+                <UserCardClassChild name="Second" />
             </div>
         )
     }
