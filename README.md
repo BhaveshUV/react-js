@@ -18,3 +18,11 @@
 - Way to test on HTTPs
 - Tree Shaking algorithm - removes unused code
 - Different dev and prod bundles
+
+# Redux Toolkit
+- Install @reduxjs/toolkit and react-redux
+- Build our store using configureStore() from rtk
+- Connect our store to our app
+- Create a slice (cartSlice)
+- dispatch(action)
+- Selector

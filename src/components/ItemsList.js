@@ -1,32 +1,45 @@
 import { CDN_URL } from "../../utils/constant";
-import { VegIcon, NonVegIcon } from "./RestaurantCategory";
-import { CDN_URL } from "../../utils/constant";
+import { VegIcon, NonVegIcon } from "../../utils/constant";
+import { useDispatch } from "react-redux";
+import { addItem, removeItem } from "../../utils/appStore/cartSlice";
 
-const ItemsList = ({ categ, isVeg, itemsVisibility }) => {
+const ItemsList = ({ items, isCartItem }) => {
+    let dispatch = useDispatch();
+
+    let addCartItems = (item) => {
+        dispatch(addItem(item));
+    }
+
+    let removeCartItems = (index) => {
+        dispatch(removeItem(index));
+    }
+
     return (
         <div>
-            {itemsVisibility && categ?.itemCards?.filter((dish) => {
-                if (isVeg) {
-                    return dish?.card?.info?.isVeg;
-                }
-                else {
-                    return dish;
-                }
-            }).map((dish) => {
+            {items.map((dish, index) => {
                 return (
-                    <div key={dish.card.info.name} className="py-4 border-gray-400 border-b-[1px]">
-                        <div style={{ display: "flex", justifyContent: "space-between" }}>
+                    <div key={isCartItem? index : dish.card.info.id} className="py-4 border-gray-400 border-b-[1px] h-min">
+                        <div style={{ display: "flex", justifyContent: "space-between", gap: "1rem" }}>
                             <div className="w-9/12">
                                 <div style={{ display: "flex", alignItems: "center" }}>
                                     {(dish.card.info.isVeg == 1) ? <VegIcon /> : <NonVegIcon />}
                                 </div>
-                                <div>{dish.card.info.name}</div>
-                                <div className="text-sm">₹{dish?.card?.info?.price / 100 || dish?.card?.info?.defaultPrice / 100 || ""}</div>
+                                <div className="text-white">{dish.card.info.name}</div>
+                                <div className="text-sm text-white">₹{dish?.card?.info?.price / 100 || dish?.card?.info?.defaultPrice / 100 || ""}</div>
                                 <div className="text-xs py-4 text-gray-400">{dish?.card?.info?.description}</div>
                             </div>
-                            <div className="w-32 min-h-12 relative h-fit">
-                                <button className="bg-white text-green-700 text-sm font-bold px-4 py-2 rounded-lg absolute left-[50%] translate-x-[-50%] bottom-[-0.5rem] w-max shadow-sm shadow-gray-400">ADD +</button>
-                                <img className="rounded-lg" src={CDN_URL + dish?.card?.info?.imageId} alt=""/>
+                            <div className="min-w-24 relative h-24">
+                                {
+                                    isCartItem ?
+                                    <button onClick={() => removeCartItems(index)} className="bg-white text-red-700 text-sm font-bold px-4 py-2 rounded-lg absolute left-[50%] translate-x-[-50%] bottom-[-0.5rem] w-max shadow-sm shadow-gray-400">
+                                        REMOVE -
+                                    </button> :
+                                    <button onClick={() => addCartItems(dish)} className="bg-white text-green-700 text-sm font-bold px-4 py-2 rounded-lg absolute left-[50%] translate-x-[-50%] bottom-[-0.5rem] w-max shadow-sm shadow-gray-400">
+                                        ADD +
+                                    </button>
+                                }
+
+                                <img className="rounded-lg h-full" src={CDN_URL + dish?.card?.info?.imageId} alt="" />
                             </div>
                         </div>
                     </div>

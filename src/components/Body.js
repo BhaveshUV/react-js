@@ -4,6 +4,7 @@ import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../../utils/useOnlineStatus";
 import UserContext from "../../utils/UserContext";
+import { useGetRestaurantListQuery } from "../../utils/appStore/apiSlice";
 
 let searchFunc = undefined;
 
@@ -11,27 +12,31 @@ let searchFunc = undefined;
 export let Body = () => {
     // console.log(`Body render`);
     let html = document.getElementsByTagName("html");
-    let [rests, setRests] = useState([]);
+    // let [rests, setRests] = useState([]);
     let [searchTxt, setSearchTxt] = useState(``);
-    let [restsCopy, setRestsCopy] = useState([]);
+    // let [restsCopy, setRestsCopy] = useState([]);
 
     let { username, setUser } = useContext(UserContext);
 
-    // console.log("RestsCopy: ", restsCopy);
-    useEffect(() => {
-        let action = (event) => {
-            if (event.key === "Enter") {
-                searchFunc();
-                console.log(event);
-            }
-        }
-        window.addEventListener("keydown", action);
-        fetchData?.();
+    let { data: dataJson, error, isLoading } = useGetRestaurantListQuery();
+    restList = dataJson?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+    console.log(restList);
 
-        return () => {
-            window.removeEventListener("keydown", action);
-        }
-    }, []);
+    // console.log("RestsCopy: ", restsCopy);
+    // useEffect(() => {
+    //     let action = (event) => {
+    //         if (event.key === "Enter") {
+    //             searchFunc();
+    //             console.log(event);
+    //         }
+    //     }
+    //     window.addEventListener("keydown", action);
+    //     fetchData?.();
+
+    //     return () => {
+    //         window.removeEventListener("keydown", action);
+    //     }
+    // }, []);
 
     let fetchData = async () => {
         console.log("useEffect called");
@@ -39,8 +44,9 @@ export let Body = () => {
         let dataJson = await data.json();
         restList = dataJson?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
         console.log(restList);
-        setRestsCopy(restList);
-        setRests(restList);
+
+        // setRestsCopy(restList);
+        // setRests(restList);
     }
 
     let status = useOnlineStatus();
@@ -50,8 +56,11 @@ export let Body = () => {
         </h2>;
     }
 
-    if (rests.length === 0) {
-
+    if (error) {
+        return (
+            <Error />
+        )
+    } else if (isLoading) {
         return (
             // html[0].style = "overflow: hidden",
             <div className='flex flex-col gap-8 px-[10vw]'>
@@ -64,7 +73,7 @@ export let Body = () => {
                     <button className="rounded-md bg-gray-300 px-2">Search</button>
                 </div>
                 <div id="filter">
-                    <button className="rounded-md bg-green-800 leading-8 text-white px-2">4.3+ Rating</button>
+                    <button className="rounded-md bg-green-800 leading-8 text-white px-2">4+ Rating</button>
                 </div>
                 <div className='flex flex-wrap justify-center gap-8'>
                     <Shimmer />
@@ -89,6 +98,12 @@ export let Body = () => {
             setRests(rests);
         }
     }
+
+    // setRestsCopy(restList);
+    // setRests(restList);
+
+    let rests = restList;
+    let restsCopy = restList;
 
     let VegCard = withVegLabel(Card);
 

@@ -4,6 +4,7 @@ import ShimmerRest from "./ShimmerRest";
 import useRestInfo from "../../utils/useRestInfo";
 import RestaurantCategory from "./RestaurantCategory";
 import RestaurantNestedCategory from "./RestaurantNestedCategory";
+import Error from "./Error";
 
 const Restaurant = () => {
     const [isVeg, setIsVeg] = useState(false);
@@ -12,16 +13,21 @@ const Restaurant = () => {
 
     // console.log(resId);
 
-    const restInfo = useRestInfo(resId);
+    const {data: restInfo, error, isLoading} = useRestInfo(resId);
 
-    if (restInfo == null) {
+    if (error) {
+        return (
+            <Error />
+        )
+    } else if(isLoading) {
         return (
             <ShimmerRest />
         )
     }
+    console.log(restInfo);
 
-    let { name, id, costForTwoMessage, cuisines, sla, avgRating } = restInfo?.cards[0]?.card?.card?.info;
-    let { cards: categories } = restInfo?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR;
+    let { name, id, costForTwoMessage, cuisines, sla, avgRating } = restInfo?.data.cards[2]?.card?.card?.info;
+    let { cards: categories } = restInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
     // console.log(categories);
     let checkBox = document.getElementById("vegBtn");
     return (

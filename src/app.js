@@ -3,7 +3,7 @@ import React, { lazy, Suspense, useState, useContext, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import { Header } from "./components/Header";
 import Body from './components/Body';
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, createHashRouter, Outlet, RouterProvider } from 'react-router-dom';
 // import About from './components/About';
 const About = lazy(() => import('./components/About'));
 import Error from "./components/Error";
@@ -13,7 +13,9 @@ import Login from "./components/Login";
 let Grocery = lazy(() => import("./components/Grocery"));
 import Loading from "./components/Loading";
 import UserContext from "../utils/UserContext";
-
+import appStore from '../utils/appStore/appStore';
+import { Provider } from "react-redux";
+import Cart from "../src/components/Cart";
 
 const App = () => {
     const [user, setUser] = useState();
@@ -27,16 +29,18 @@ const App = () => {
     }, []);
 
     return (
-        <UserContext.Provider value={{ username: user, setUser }}>
-            <div id='app' className='flex flex-col gap-8 min-h-[100vh]'>
-                <Header />
-                <Outlet />
-            </div>
-        </UserContext.Provider>
+        <Provider store={appStore}>
+            <UserContext.Provider value={{ username: user, setUser }}>
+                <div id='app' className='flex flex-col gap-8 min-h-[100vh]'>
+                    <Header />
+                    <Outlet />
+                </div>
+            </UserContext.Provider>
+        </Provider>
     );
 }
 
-const appRouter = createBrowserRouter([
+const appRouter = createHashRouter([
     {
         path: "/",
         element: <App />,
@@ -67,6 +71,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/login",
                 element: <Login />
+            },
+            {
+                path: "/cart",
+                element: <Cart />
             }
         ]
     }
