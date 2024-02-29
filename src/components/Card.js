@@ -7,7 +7,7 @@ export let Card = (props) => {
     let { info } = restaurant;
     let { username } = useContext(UserContext);
     return (
-        <div className='w-64 max-w-60 h-full flex flex-col flex-grow p-2 rounded-md  hover:bg-yellow-500 hover:shadow-md'>
+        <div data-testid="cards" className='w-64 max-w-60 h-full flex flex-col flex-grow p-2 rounded-md  hover:bg-yellow-500 hover:shadow-md'>
             <div className="h-40 bg-cover rounded-md bg-center" style={{ backgroundImage: `url(${CDN_URL + info.cloudinaryImageId})` }}>
                 {/* <img src={CDN_URL + info.cloudinaryImageId} className="rounded-md" /> */}
             </div>

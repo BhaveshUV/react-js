@@ -28,7 +28,7 @@ export let Header = () => {
                 <li><Link to="/about">About</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
                 <li className="text-lime-500"><Link to="/grocery">Grocery</Link></li>
-                <li><Link to="/cart">🛒{cartItems.length}</Link></li>
+                <li><Link to="/cart">{`🛒 ${cartItems.length}`}</Link></li>
                 <li>
                     {/* Way 1 */}
                     {logBtn === "Login" ? <Link to="/login"><button className="bg-yellow-400 rounded-md px-4" onClick={() => setLogBtn("Logout")}>{logBtn}</button></Link> : <Link to="/"><button className="bg-yellow-400 rounded-md px-4" onClick={() => setLogBtn("Login")}>{logBtn}</button></Link>}

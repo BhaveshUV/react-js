@@ -1,33 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ShimmerRest from "./ShimmerRest";
 import useRestInfo from "../../utils/useRestInfo";
 import RestaurantCategory from "./RestaurantCategory";
 import RestaurantNestedCategory from "./RestaurantNestedCategory";
 import Error from "./Error";
+import { MENU_URL } from "../../utils/constant";
 
 const Restaurant = () => {
     const [isVeg, setIsVeg] = useState(false);
     const { resId } = useParams(); 
     const [showIndex, setShowIndex] = useState(null);
+    const [restInfo, setRestInfo] = useState(null);
 
     // console.log(resId);
 
-    const {data: restInfo, error, isLoading} = useRestInfo(resId);
+    // const {data: restInfo, error, isLoading} = useRestInfo(resId);
 
-    if (error) {
-        return (
-            <Error />
-        )
-    } else if(isLoading) {
-        return (
-            <ShimmerRest />
-        )
+    // if (error) {
+    //     return (
+    //         <Error />
+    //     )
+    // } else if(isLoading) {
+    //     return (
+    //         <ShimmerRest />
+    //     )
+    // }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    let fetchData = async () => {
+        let response = await fetch(MENU_URL + resId);
+        let data = await response.json();
+
+        setRestInfo(data);
     }
     console.log(restInfo);
 
-    let { name, id, costForTwoMessage, cuisines, sla, avgRating } = restInfo?.data.cards[2]?.card?.card?.info;
-    let { cards: categories } = restInfo?.data.cards[4]?.groupedCard?.cardGroupMap?.REGULAR;
+    if(!restInfo) {
+        return <ShimmerRest />
+    }
+
+    let { name, id, costForTwoMessage, cuisines, sla, avgRating } = restInfo?.data.cards[0]?.card?.card?.info;
+    let { cards: categories } = restInfo?.data.cards[2]?.groupedCard?.cardGroupMap?.REGULAR;
     // console.log(categories);
     let checkBox = document.getElementById("vegBtn");
     return (
